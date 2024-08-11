@@ -1,4 +1,4 @@
-package org.githubscrapper.controller.conditions;
+package org.repylot.controller.conditions;
 
 public class PythonCondition implements Condition {
     @Override

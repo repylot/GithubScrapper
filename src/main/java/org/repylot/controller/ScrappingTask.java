@@ -1,8 +1,8 @@
-package org.githubscrapper.controller;
+package org.repylot.controller;
 
-import org.githubscrapper.controller.datalake.DataLakeWriter;
-import org.githubscrapper.controller.scrapper.Crawler;
-import org.githubscrapper.controller.scrapper.Scrapper;
+import org.repylot.controller.datalake.DataLakeWriter;
+import org.repylot.controller.scrapper.Crawler;
+import org.repylot.controller.scrapper.Scrapper;
 
 import java.util.ArrayList;
 import java.util.TimerTask;

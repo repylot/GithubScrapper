@@ -1,4 +1,4 @@
-package org.githubscrapper.controller.datalake;
+package org.repylot.controller.datalake;
 
 public class FileWriter implements DataLakeWriter {
     @Override

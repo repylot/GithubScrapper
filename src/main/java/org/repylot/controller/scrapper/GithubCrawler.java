@@ -1,6 +1,6 @@
-package org.githubscrapper.controller.scrapper;
+package org.repylot.controller.scrapper;
 
-import org.githubscrapper.controller.conditions.Condition;
+import org.repylot.controller.conditions.Condition;
 
 import java.util.ArrayList;
 

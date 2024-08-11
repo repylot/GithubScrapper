@@ -1,13 +1,13 @@
-package org.githubscrapper;
+package org.repylot;
 
-import org.githubscrapper.controller.ScrappingTask;
-import org.githubscrapper.controller.datalake.DataLakeWriter;
-import org.githubscrapper.controller.datalake.FileWriter;
-import org.githubscrapper.controller.scrapper.Crawler;
-import org.githubscrapper.controller.scrapper.Scrapper;
-import org.githubscrapper.controller.conditions.PythonCondition;
-import org.githubscrapper.controller.scrapper.GithubCrawler;
-import org.githubscrapper.controller.scrapper.GithubScrapper;
+import org.repylot.controller.ScrappingTask;
+import org.repylot.controller.datalake.DataLakeWriter;
+import org.repylot.controller.datalake.FileWriter;
+import org.repylot.controller.scrapper.Crawler;
+import org.repylot.controller.scrapper.Scrapper;
+import org.repylot.controller.conditions.PythonCondition;
+import org.repylot.controller.scrapper.GithubCrawler;
+import org.repylot.controller.scrapper.GithubScrapper;
 
 import java.util.Timer;
 

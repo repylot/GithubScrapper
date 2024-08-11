@@ -1,4 +1,4 @@
-package org.githubscrapper.controller.scrapper;
+package org.repylot.controller.scrapper;
 
 public interface Scrapper {
     String extract(String url);
