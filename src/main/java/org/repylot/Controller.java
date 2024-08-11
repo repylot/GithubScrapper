@@ -1,6 +1,7 @@
 package org.repylot;
 
 import org.repylot.controller.ScrappingTask;
+import org.repylot.controller.conditions.PythonCondition;
 import org.repylot.controller.datalake.DataLakeWriter;
 import org.repylot.controller.datalake.FileWriter;
 import org.repylot.controller.scrapper.Crawler;

@@ -32,6 +32,7 @@ public class ScrappingTask extends TimerTask {
 
         for (int index = 0; index < subUrls.size(); index++) {
             ArrayList<String> documents = getExtract(subUrls, index);
+            System.out.println(documents);
         }
 
         page++;
@@ -39,7 +40,7 @@ public class ScrappingTask extends TimerTask {
 
     private ArrayList<String> getExtract(ArrayList<String> subUrls, int index) {
         try {
-            return scrapper.extract(subUrls.get(index));
+            return scrapper.extract(subUrls.get(index) + "/tree/master/");
         } catch (Exception  e) {
             throw new RuntimeException(e);
         }

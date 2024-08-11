@@ -3,6 +3,7 @@ package org.repylot.controller.scrapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.repylot.controller.conditions.Condition;
 
 import java.io.IOException;
 import java.util.ArrayList;

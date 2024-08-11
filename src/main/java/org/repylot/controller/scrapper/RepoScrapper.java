@@ -15,29 +15,41 @@ public class RepoScrapper implements Scrapper {
     private final String aClass = "Link--primary";
     private final String codeClass = "react-code-lines";
 
+    private String mainUrl;
+    private int recursiveIteration = 0;
+
     @Override
     public ArrayList<String> extract(String url) throws IOException, InterruptedException {
-        System.out.println(url);
+        if (recursiveIteration == 0) mainUrl = url;
+        ArrayList<String> links = getDivUrls(url);
+        if (recursiveIteration == 0) links.remove(0);
 
-        Elements divs = getDivElements(url);
-        ArrayList<String> urls = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
+        if (links.size() <= 1) return links;
 
-        for (Element div : divs) {
-            Element link = div.selectFirst("a." + aClass);
-
-            String href = "https://github.com" + link.attr("href");
-            ArrayList<String> links = getSubDivElements(href);
+        for (String link : links) {
+            System.out.println(link);
+            if (url.length() < link.length()) {
+                result.add(link);
+                recursiveIteration++;
+                result.addAll(extract(link));
+            }
         }
 
-        return null;
+        recursiveIteration--;
+        return result;
     }
 
-    private ArrayList<String> getSubDivElements(String href) throws IOException {
-        Document doc = Jsoup.connect(href).get();
+    private ArrayList<String> getDivUrls(String href) throws IOException {
+        Document doc = getDocument(href);
+        if (doc == null) return new ArrayList<String>();
+
         ArrayList<String> links = getDynamicElements(href, doc);
 
+        int i = 0;
         Elements divs = doc.select("div." + divClass);
         for (Element div : divs) {
+            if (i++ % 2 == 0) continue;
             Element link = div.selectFirst("a." + aClass);
             links.add("https://github.com" + link.attr("href"));
         }
@@ -45,7 +57,15 @@ public class RepoScrapper implements Scrapper {
         return links;
     }
 
-    private static ArrayList<String> getDynamicElements(String href, Document doc) {
+    private Document getDocument(String href) {
+        try {
+            return Jsoup.connect(href).get();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private ArrayList<String> getDynamicElements(String href, Document doc) {
         String docString = doc.toString();
 
         Pattern pattern = Pattern.compile("\\[\\{\"name\":\"([\\w\\.\\s]+)\",\"path\":\"([^\\s\\\"]+)\"");
@@ -53,13 +73,8 @@ public class RepoScrapper implements Scrapper {
 
         ArrayList<String> links = new ArrayList<>();
         while (matcher.find())
-            links.add(href + matcher.group(2));
-        return links;
-    }
+            links.add(this.mainUrl + matcher.group(2));
 
-    private Elements getDivElements(String url) throws IOException, InterruptedException {
-        Document doc = Jsoup.connect(url).get();
-        Elements divs = doc.select("div." + divClass);
-        return divs;
+        return links;
     }
 }
