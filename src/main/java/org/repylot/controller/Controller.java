@@ -1,8 +1,7 @@
 package org.repylot.controller;
 
-import org.repylot.controller.ScrappingTask;
 import org.repylot.controller.datalake.DataLakeWriter;
-import org.repylot.controller.datalake.FileWriter;
+import org.repylot.controller.datalake.FileDataLakeWriter;
 import org.repylot.controller.scrapper.Crawler;
 import org.repylot.controller.scrapper.Scrapper;
 import org.repylot.controller.scrapper.impl.RepoCrawler;
@@ -18,7 +17,7 @@ public class Controller {
     public Controller() {
         this.githubCrawler = new RepoCrawler();
         this.githubScrapper = new RepoScrapper();
-        this.fileWriter = new FileWriter();
+        this.fileWriter = new FileDataLakeWriter();
     }
 
     public void run() {

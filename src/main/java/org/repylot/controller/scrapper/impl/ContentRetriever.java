@@ -10,10 +10,21 @@ public class ContentRetriever  {
     private final String rawClass = "types__StyledButton-sc-ws60qy-0";
 
     public String retrieve(String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
-        Elements link = doc.select("a." + rawClass);
-        String href = link.get(2).attr("href");
+        Document doc = getDocument(url);
+        String href = rawContentLink(doc);
+        return rawContent(href);
+    }
 
-        return Jsoup.connect(href).get().body().toString();
+    private static String rawContent(String href) throws IOException {
+        return getDocument(href).body().toString();
+    }
+
+    private static Document getDocument(String url) throws IOException {
+        return Jsoup.connect(url).get();
+    }
+
+    private String rawContentLink(Document doc) {
+        Elements link = doc.select("a." + rawClass);
+        return link.get(2).attr("href");
     }
 }
