@@ -5,9 +5,8 @@ import org.repylot.controller.datalake.DataLakeWriter;
 import org.repylot.controller.datalake.FileWriter;
 import org.repylot.controller.scrapper.Crawler;
 import org.repylot.controller.scrapper.Scrapper;
-import org.repylot.controller.conditions.PythonCondition;
-import org.repylot.controller.scrapper.GithubCrawler;
-import org.repylot.controller.scrapper.GithubScrapper;
+import org.repylot.controller.scrapper.RepoCrawler;
+import org.repylot.controller.scrapper.RepoScrapper;
 
 import java.util.Timer;
 
@@ -17,8 +16,8 @@ public class Controller {
     private final DataLakeWriter fileWriter;
 
     public Controller() {
-        this.githubCrawler = new GithubCrawler(new PythonCondition());
-        this.githubScrapper = new GithubScrapper();
+        this.githubCrawler = new RepoCrawler();
+        this.githubScrapper = new RepoScrapper();
         this.fileWriter = new FileWriter();
     }
 
@@ -26,6 +25,6 @@ public class Controller {
         Timer timer = new Timer();
         timer.schedule(new ScrappingTask(githubCrawler,
                 githubScrapper,
-                fileWriter), 2000);
+                fileWriter), 0, 2000);
     }
 }

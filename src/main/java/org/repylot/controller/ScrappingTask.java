@@ -4,6 +4,7 @@ import org.repylot.controller.datalake.DataLakeWriter;
 import org.repylot.controller.scrapper.Crawler;
 import org.repylot.controller.scrapper.Scrapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
@@ -26,11 +27,29 @@ public class ScrappingTask extends TimerTask {
 
     @Override
     public void run() {
-        ArrayList<String> subUrls = crawler.getSubUrls(url + page);
+        ArrayList<String> subUrls = getSubUrls();
+        System.out.println(subUrls);
+
         for (int index = 0; index < subUrls.size(); index++) {
-            String document = scrapper.extract(subUrls.get(index));
-            writer.save(subUrls.get(index) + index, document);
+            ArrayList<String> documents = getExtract(subUrls, index);
         }
+
         page++;
+    }
+
+    private ArrayList<String> getExtract(ArrayList<String> subUrls, int index) {
+        try {
+            return scrapper.extract(subUrls.get(index));
+        } catch (Exception  e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ArrayList<String> getSubUrls() {
+        try {
+            return crawler.getSubUrls(url + page);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 }
