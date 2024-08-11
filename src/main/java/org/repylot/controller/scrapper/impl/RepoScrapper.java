@@ -1,9 +1,10 @@
-package org.repylot.controller.scrapper;
+package org.repylot.controller.scrapper.impl;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.repylot.controller.scrapper.Scrapper;
 
 import java.io.IOException;
 import java.util.ArrayList;

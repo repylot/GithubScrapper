@@ -1,4 +1,4 @@
-package org.repylot.controller.scrapper;
+package org.repylot.controller.scrapper.impl;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

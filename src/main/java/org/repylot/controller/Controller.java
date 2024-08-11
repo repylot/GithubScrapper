@@ -1,13 +1,12 @@
-package org.repylot;
+package org.repylot.controller;
 
 import org.repylot.controller.ScrappingTask;
-import org.repylot.controller.conditions.PythonCondition;
 import org.repylot.controller.datalake.DataLakeWriter;
 import org.repylot.controller.datalake.FileWriter;
 import org.repylot.controller.scrapper.Crawler;
 import org.repylot.controller.scrapper.Scrapper;
-import org.repylot.controller.scrapper.RepoCrawler;
-import org.repylot.controller.scrapper.RepoScrapper;
+import org.repylot.controller.scrapper.impl.RepoCrawler;
+import org.repylot.controller.scrapper.impl.RepoScrapper;
 
 import java.util.Timer;
 
