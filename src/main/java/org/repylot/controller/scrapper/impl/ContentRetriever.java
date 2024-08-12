@@ -2,12 +2,13 @@ package org.repylot.controller.scrapper.impl;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.repylot.controller.scrapper.Retriever;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ContentRetriever  {
-    private final String rawClass = "types__StyledButton-sc-ws60qy-0";
+public class ContentRetriever implements Retriever {
 
     public String retrieve(String url) throws IOException {
         Document doc = getDocument(url);
@@ -24,7 +25,10 @@ public class ContentRetriever  {
     }
 
     private String rawContentLink(Document doc) {
-        Elements link = doc.select("a." + rawClass);
-        return link.get(2).attr("href");
+        Pattern pattern = Pattern.compile("\\\"rawBlobUrl\\\"\\:\\\"([\\w\\.\\s:/-]+)\\\"");
+        Matcher matcher = pattern.matcher(doc.toString());
+
+        matcher.find();
+        return matcher.group(1);
     }
 }

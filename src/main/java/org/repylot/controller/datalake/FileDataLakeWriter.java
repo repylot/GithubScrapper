@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileDataLakeWriter implements DataLakeWriter {
-    private final String dataLakePath = "/dataLake";
+    private final String dataLakePath = "datalake";
 
     @Override
     public void save(String name, String content) throws IOException {
@@ -15,11 +15,11 @@ public class FileDataLakeWriter implements DataLakeWriter {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         bufferedWriter.write(content);
+        bufferedWriter.flush();
     }
 
     private String filePath(String name) {
-        String[] splitName = name.split("/");
-        return dataLakePath + "/" + splitName[splitName.length - 1];
+        return dataLakePath + "/" + name.replace("/", "_");
     }
 
 

@@ -5,47 +5,72 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.repylot.controller.scrapper.Scrapper;
+import org.repylot.controller.scrapper.exceptions.ElementNotFoundException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RepoScrapper implements Scrapper {
     private final String divClass = "react-directory-filename-column";
     private final String aClass = "Link--primary";
-    private final String codeClass = "react-code-lines";
+
+    private ArrayList<String> result = new ArrayList<>();
 
     private String mainUrl;
     private int recursiveIteration = 0;
 
     @Override
-    public ArrayList<String> extract(String url) throws IOException, InterruptedException {
-        if (recursiveIteration == 0) mainUrl = url;
-        ArrayList<String> links = getDivUrls(url);
+    public ArrayList<String> extract(String url) throws IOException {
+        if (recursiveIteration == 0) {
+            mainUrl = url;
+            result = new ArrayList<>();
+        }
+
+        ArrayList<String> links = getSubUrls(url, 0);
         if (recursiveIteration == 0) links.remove(0);
 
-        ArrayList<String> result = new ArrayList<>();
-        if (links.size() <= 1) return links;
-
         for (String link : links) {
-            System.out.println(link);
-            if (url.length() < link.length()) {
+            if (url.length() < link.length() && !result.contains(link)) {
+                System.out.println(link);
                 result.add(link);
                 recursiveIteration++;
-                result.addAll(extract(link));
+                extract(link);
             }
         }
 
-        recursiveIteration--;
-        return result;
+        if (recursiveIteration == 0) {
+            return result;
+
+        }else {
+            recursiveIteration--;
+            return new ArrayList<>();
+        }
     }
 
-    private ArrayList<String> getDivUrls(String href) throws IOException {
-        Document doc = getDocument(href);
-        if (doc == null) return new ArrayList<String>();
+    private ArrayList<String> getSubUrls(String href, int recursiveIteration) throws IOException {
+        ArrayList<String> divUrls = getDivUrls(href);
 
-        ArrayList<String> links = getDynamicElements(href, doc);
+        try {
+            HashSet<String> urlSet = new HashSet<>(divUrls);
+            if (urlSet.size() >= 2 || recursiveIteration > 4) {
+                return divUrls;
+            }
+            throw new ElementNotFoundException();
+
+        } catch (ElementNotFoundException e) {
+            if (recursiveIteration < 4) return getSubUrls(href, ++recursiveIteration);
+            return new ArrayList<>();
+        }
+    }
+
+    private ArrayList<String> getDivUrls(String href) {
+        Document doc = getDocument(href);
+        if (doc == null) return new ArrayList<>();
+
+        ArrayList<String> links = getDynamicElements(doc);
 
         int i = 0;
         Elements divs = doc.select("div." + divClass);
@@ -66,7 +91,7 @@ public class RepoScrapper implements Scrapper {
         }
     }
 
-    private ArrayList<String> getDynamicElements(String href, Document doc) {
+    private ArrayList<String> getDynamicElements(Document doc) {
         String docString = doc.toString();
 
         Pattern pattern = Pattern.compile("\\[\\{\"name\":\"([\\w\\.\\s]+)\",\"path\":\"([^\\s\\\"]+)\"");
