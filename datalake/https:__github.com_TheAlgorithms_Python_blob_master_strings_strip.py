@@ -1,0 +1,3 @@
+<body>
+ def strip(user_string: str, characters: str = " \t\n\r") -&gt; str: """ Remove leading and trailing characters (whitespace by default) from a string. Args: user_string (str): The input string to be stripped. characters (str, optional): Optional characters to be removed (default is whitespace). Returns: str: The stripped string. Examples: &gt;&gt;&gt; strip(" hello ") 'hello' &gt;&gt;&gt; strip("...world...", ".") 'world' &gt;&gt;&gt; strip("123hello123", "123") 'hello' &gt;&gt;&gt; strip("") '' """ start = 0 end = len(user_string) while start &lt; end and user_string[start] in characters: start += 1 while end &gt; start and user_string[end - 1] in characters: end -= 1 return user_string[start:end]
+</body>

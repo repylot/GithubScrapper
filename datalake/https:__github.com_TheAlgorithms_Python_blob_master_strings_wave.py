@@ -1,0 +1,3 @@
+<body>
+ def wave(txt: str) -&gt; list: """ Returns a so called 'wave' of a given string &gt;&gt;&gt; wave('cat') ['Cat', 'cAt', 'caT'] &gt;&gt;&gt; wave('one') ['One', 'oNe', 'onE'] &gt;&gt;&gt; wave('book') ['Book', 'bOok', 'boOk', 'booK'] """ return [ txt[:a] + txt[a].upper() + txt[a + 1 :] for a in range(len(txt)) if txt[a].isalpha() ] if __name__ == "__main__": __import__("doctest").testmod()
+</body>

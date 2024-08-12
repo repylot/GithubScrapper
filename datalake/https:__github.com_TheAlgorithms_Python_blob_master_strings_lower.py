@@ -1,0 +1,3 @@
+<body>
+ def lower(word: str) -&gt; str: """ Will convert the entire string to lowercase letters &gt;&gt;&gt; lower("wow") 'wow' &gt;&gt;&gt; lower("HellZo") 'hellzo' &gt;&gt;&gt; lower("WHAT") 'what' &gt;&gt;&gt; lower("wh[]32") 'wh[]32' &gt;&gt;&gt; lower("whAT") 'what' """ # Converting to ASCII value, obtaining the integer representation # and checking to see if the character is a capital letter. # If it is a capital letter, it is shifted by 32, making it a lowercase letter. return "".join(chr(ord(char) + 32) if "A" &lt;= char &lt;= "Z" else char for char in word) if __name__ == "__main__": from doctest import testmod testmod()
+</body>
