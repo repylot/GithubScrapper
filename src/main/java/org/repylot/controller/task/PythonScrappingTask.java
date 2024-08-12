@@ -34,10 +34,9 @@ public class PythonScrappingTask extends TimerTask {
     @Override
     public void run() {
         ArrayList<String> subUrls = getSubUrls();
-
         for (int index = 0; index < subUrls.size(); index++) {
             ArrayList<String> documents = getExtract(subUrls, index);
-            System.out.println(documents);
+
             for (String document : documents) {
                 if (condition.satisfy(document)) {
                     try {
@@ -58,7 +57,7 @@ public class PythonScrappingTask extends TimerTask {
         try {
             return scrapper.extract(subUrls.get(index) + "/tree/master/");
         } catch (Exception  e) {
-            throw new RuntimeException(e);
+            return new ArrayList<>();
         }
     }
 
