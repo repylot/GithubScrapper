@@ -1,6 +1,7 @@
 package org.repylot.controller.task;
 
 import org.repylot.controller.conditions.Condition;
+import org.repylot.controller.conditions.JavaCondition;
 import org.repylot.controller.conditions.PythonCondition;
 import org.repylot.controller.datalake.DataLakeWriter;
 import org.repylot.controller.scrapper.Crawler;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-public class PythonScrappingTask extends TimerTask {
+public class JavaScrappingTask extends TimerTask {
     private final Crawler crawler;
     private final Scrapper scrapper;
     private final DataLakeWriter writer;
@@ -22,13 +23,13 @@ public class PythonScrappingTask extends TimerTask {
     private final String url;
     private int page;
 
-    public PythonScrappingTask(Crawler crawler, Scrapper scrapper, DataLakeWriter writer, Retriever retriever) {
+    public JavaScrappingTask(Crawler crawler, Scrapper scrapper, DataLakeWriter writer, Retriever retriever) {
         this.crawler = crawler;
         this.scrapper = scrapper;
         this.writer = writer;
         this.retriever = retriever;
-        this.condition = new PythonCondition();
-        this.url = "https://github.com/search?q=%23python&type=repositories&p=";
+        this.condition = new JavaCondition();
+        this.url = "https://github.com/search?q=%23java&type=repositories&p=";
         this.page = 1;
     }
 

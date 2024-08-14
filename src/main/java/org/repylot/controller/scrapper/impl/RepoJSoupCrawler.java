@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class RepoCrawler implements Crawler {
+public class RepoJSoupCrawler implements Crawler {
     private final String divClass = "search-title";
     private final String aClass = "Link__StyledLink-sc-14289xe-0";
 
