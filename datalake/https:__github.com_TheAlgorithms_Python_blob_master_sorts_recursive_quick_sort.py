@@ -1,3 +1,0 @@
-<body>
- def quick_sort(data: list) -&gt; list: """ &gt;&gt;&gt; for data in ([2, 1, 0], [2.2, 1.1, 0], "quick_sort"): ... quick_sort(data) == sorted(data) True True True """ if len(data) &lt;= 1: return data else: return [ *quick_sort([e for e in data[1:] if e &lt;= data[0]]), data[0], *quick_sort([e for e in data[1:] if e &gt; data[0]]), ] if __name__ == "__main__": import doctest doctest.testmod()
-</body>

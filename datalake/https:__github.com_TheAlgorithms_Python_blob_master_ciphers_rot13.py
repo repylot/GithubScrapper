@@ -1,3 +1,0 @@
-<body>
- def dencrypt(s: str, n: int = 13) -&gt; str: """ https://en.wikipedia.org/wiki/ROT13 &gt;&gt;&gt; msg = "My secret bank account number is 173-52946 so don't tell anyone!!" &gt;&gt;&gt; s = dencrypt(msg) &gt;&gt;&gt; s "Zl frperg onax nppbhag ahzore vf 173-52946 fb qba'g gryy nalbar!!" &gt;&gt;&gt; dencrypt(s) == msg True """ out = "" for c in s: if "A" &lt;= c &lt;= "Z": out += chr(ord("A") + (ord(c) - ord("A") + n) % 26) elif "a" &lt;= c &lt;= "z": out += chr(ord("a") + (ord(c) - ord("a") + n) % 26) else: out += c return out def main() -&gt; None: s0 = input("Enter message: ") s1 = dencrypt(s0, 13) print("Encryption:", s1) s2 = dencrypt(s1, 13) print("Decryption: ", s2) if __name__ == "__main__": import doctest doctest.testmod() main()
-</body>

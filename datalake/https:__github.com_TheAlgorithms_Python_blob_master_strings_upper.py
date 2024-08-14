@@ -1,3 +1,0 @@
-<body>
- def upper(word: str) -&gt; str: """ Convert an entire string to ASCII uppercase letters by looking for lowercase ASCII letters and subtracting 32 from their integer representation to get the uppercase letter. &gt;&gt;&gt; upper("wow") 'WOW' &gt;&gt;&gt; upper("Hello") 'HELLO' &gt;&gt;&gt; upper("WHAT") 'WHAT' &gt;&gt;&gt; upper("wh[]32") 'WH[]32' """ return "".join(chr(ord(char) - 32) if "a" &lt;= char &lt;= "z" else char for char in word) if __name__ == "__main__": from doctest import testmod testmod()
-</body>
