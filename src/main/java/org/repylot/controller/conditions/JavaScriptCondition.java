@@ -11,6 +11,6 @@ public class JavaScriptCondition implements Condition {
 
     private boolean isPythonFile(String url) {
         int extensionBegin = url.length() - 3;
-        return url.substring(extensionBegin).equals(".s");
+        return url.substring(extensionBegin).equals(".js");
     }
 }

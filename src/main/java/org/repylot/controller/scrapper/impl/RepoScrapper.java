@@ -67,6 +67,8 @@ public class RepoScrapper implements Scrapper {
     }
 
     private ArrayList<String> getDivUrls(String href) {
+        if (href.equals("https://github.com/CyC2018/CS-Notes/tree/master/docs/_style/components"))
+            System.out.println("ok");
         Document doc = getDocument(href);
         if (doc == null) return new ArrayList<>();
 

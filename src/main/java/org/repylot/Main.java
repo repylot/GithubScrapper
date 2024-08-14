@@ -1,6 +1,9 @@
 package org.repylot;
 
 import org.repylot.controller.Controller;
+import org.repylot.controller.conditions.Condition;
+import org.repylot.controller.conditions.JavaCondition;
+import org.repylot.controller.conditions.JavaScriptCondition;
 import org.repylot.controller.scrapper.impl.RepoJSONCrawler;
 
 import java.io.IOException;

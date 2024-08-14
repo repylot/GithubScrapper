@@ -19,7 +19,7 @@ public class FileDataLakeWriter implements DataLakeWriter {
     }
 
     private String filePath(String name) {
-        return dataLakePath + "/" + name.replace("/", "_");
+        return dataLakePath + "/" + name.replace("/", "_").replace(":", "");
     }
 
 
