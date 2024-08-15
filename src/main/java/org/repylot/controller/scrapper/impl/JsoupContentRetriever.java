@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ContentRetriever implements Retriever {
+public class JsoupContentRetriever implements Retriever {
 
     public String retrieve(String url) throws IOException {
         Document doc = getDocument(url);
@@ -17,7 +17,7 @@ public class ContentRetriever implements Retriever {
     }
 
     private static String rawContent(String href) throws IOException {
-        return getDocument(href).body().toString();
+        return getDocument(href).body().text();
     }
 
     private static Document getDocument(String url) throws IOException {
